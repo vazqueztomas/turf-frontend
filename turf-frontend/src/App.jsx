@@ -1,15 +1,14 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 import './App.css'
 import Login from './Login'
+import Home from './Home'
 
 function App() {
 
   return (
     <>
       <Text fontSize='xxx-large'>Turf</Text>
-      <Box p={4}>
-      <Login/>
-      </Box>
+      <Home/>
     </>
   )
 }

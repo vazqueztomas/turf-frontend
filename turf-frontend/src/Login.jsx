@@ -6,6 +6,7 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 export default function HookForm() {
   const {
@@ -14,13 +15,16 @@ export default function HookForm() {
     formState: { errors, isSubmitting },
   } = useForm()
 
+  const navigate = useNavigate()
+
   function onSubmit(values) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
-        resolve()
-      }, 3000)
-    })
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     alert(JSON.stringify(values, null, 2))
+    //     resolve()
+    //   }, 3000)
+    // })
+    navigate("/home")
   }
 
   return (
