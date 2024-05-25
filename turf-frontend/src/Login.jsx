@@ -52,7 +52,7 @@ export default function HookForm() {
         </FormErrorMessage>
       </FormControl>
       <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
-        Submit
+        Ingresar
       </Button>
     </form>
   )
