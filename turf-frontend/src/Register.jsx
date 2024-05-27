@@ -1,18 +1,26 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from './AuthContext';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { register: registerUser } = useAuth();
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate("/home")
 
     const onSubmit = async (data) => {
         try {
-            console.log(data)
             await registerUser(data.email, data.password);
+            navigate("/home")
             // Redirigir o mostrar mensaje de éxito
         } catch (error) {
-            // Manejar error de registro
-            console.error("Error en el registro", error);
+            if (error.response && error.response.status === 400) {
+                setErrorMessage(error.response.data.detail);
+            } else {
+                console.error("Error en el registro", error);
+                setErrorMessage(error.detail);
+            }
         }
     };
 
@@ -34,6 +42,7 @@ const Register = () => {
                 />
                 {errors.password && <span>{errors.password.message}</span>}
             </div>
+            {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             <button type="submit">Registrarse</button>
         </form>
     );
