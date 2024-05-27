@@ -7,6 +7,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import { AuthProvider } from "./AuthContext";
+import Admin from "./Admin";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: '/admin',
+    element: <Admin/>
+  }
 ]);
 
 const rootElement = document.getElementById("root");
