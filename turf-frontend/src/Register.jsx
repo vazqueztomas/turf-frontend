@@ -2,7 +2,14 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "./AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Divider, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  FormLabel,
+  Input,
+} from "@chakra-ui/react";
 
 const Register = () => {
   const {
@@ -32,25 +39,29 @@ const Register = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl>
-        <div>
+        <Box>
           <FormLabel>Email:</FormLabel>
           <Input
             type="email"
             {...register("email", { required: "Este campo es obligatorio" })}
           />
           {errors.email && <span>{errors.email.message}</span>}
-        </div>
-        <div>
+        </Box>
+        <Box my={2}>
           <FormLabel>Contraseña:</FormLabel>
           <Input
             type="password"
             {...register("password", { required: "Este campo es obligatorio" })}
           />
           {errors.password && <span>{errors.password.message}</span>}
-        </div>
+        </Box>
       </FormControl>
-      <Divider my={4}/>
-      {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
+      <Divider my={4} />
+      {errorMessage && (
+        <Box my={4} style={{ color: "red" }}>
+          {errorMessage}
+        </Box>
+      )}
       <Button type="submit" isLoading={isSubmitting}>
         Registrarse
       </Button>
