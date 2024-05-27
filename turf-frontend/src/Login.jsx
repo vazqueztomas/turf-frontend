@@ -1,10 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from './AuthContext';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { login } = useAuth();
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate("/home")
 
     const onSubmit = async (data) => {
@@ -13,8 +15,12 @@ const Login = () => {
             // Redirigir o mostrar mensaje de éxito
             navigate("/home")
         } catch (error) {
-            // Manejar error de inicio de sesión
-            console.error("Error en el inicio de sesión", error);
+            if (error.response && error.response.status === 400) {
+                setErrorMessage(error.response.data.detail);
+            } else {
+                console.error("Error en el registro", error);
+                setErrorMessage(error.detail);
+            }
         }
     };
 
@@ -36,6 +42,7 @@ const Login = () => {
                 />
                 {errors.password && <span>{errors.password.message}</span>}
             </div>
+            {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             <button type="submit">Iniciar sesión</button>
         </form>
     );
