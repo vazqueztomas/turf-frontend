@@ -1,5 +1,5 @@
 import CustomTabs from './CustomTabs.tsx';
-import { VIDEOS_HIPODROMOS } from './utils.js';
+import { VIDEOS_HIPODROMOS } from './utils.tsx';
 
 const Home = () => {
     const labels = ['Palermo', 'San Isidro'];
