@@ -31,7 +31,5 @@ jobs:
                       node_modules/.cache/typescript
                   key: lint-${{ github.sha }}
                   restore-keys: lint-
-            - name: Lint
-              run: npm run lint
-            - name: Format
-              run: npm run format
+            - name: Lint and Format code 
+              run: npm run lint && npm run format
