@@ -1,37 +1,37 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  lint:
-    name: Lint and check format
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out files from GitHub
-        uses: actions/checkout@v4.1.7
-      - name: Setup Node
-        uses: actions/setup-node@v4.0.3
-      - name: Install dependencies
-        run: npm install --immutable
-      - name: Setup lint cache
-        uses: actions/cache@v4.0.2
-        with:
-          path: |
-            node_modules/.cache/prettier
-            node_modules/.cache/eslint
-            node_modules/.cache/typescript
-          key: lint-${{ github.sha }}
-          restore-keys: lint-
-      - name: Lint
-        run: npm run lint
-      - name: Format
-        run: npm run format
+    lint:
+        name: Lint and check format
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out files from GitHub
+              uses: actions/checkout@v4.1.7
+            - name: Setup Node
+              uses: actions/setup-node@v4.0.3
+            - name: Install dependencies
+              run: npm install --immutable
+            - name: Setup lint cache
+              uses: actions/cache@v4.0.2
+              with:
+                  path: |
+                      node_modules/.cache/prettier
+                      node_modules/.cache/eslint
+                      node_modules/.cache/typescript
+                  key: lint-${{ github.sha }}
+                  restore-keys: lint-
+            - name: Lint
+              run: npm run lint
+            - name: Format
+              run: npm run format
