@@ -1,13 +1,22 @@
-import CustomTabs from './CustomTabs.tsx';
-import { VIDEOS_HIPODROMOS } from './utils.tsx';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import Header from './assets/Header'
+import Button from './assets/Button'
 
-const Home = () => {
-    const labels = ['Palermo', 'San Isidro'];
+const Home: React.FC = () => {
+    const navigate = useNavigate()
+
     return (
-        <div className="p-4">
-            <CustomTabs tabLabels={labels} tabContents={VIDEOS_HIPODROMOS} />
+        <div className="min-h-screen flex flex-col items-center pt-10 bg-gray-100 gap-2">
+            <Header />
+            <div className="w-full max-w-xs">
+                <Button label="Programas" onClick={() => navigate('/programs')} />
+            </div>
+            <div className="w-full max-w-xs">
+                <Button label="Iniciar Sesión" onClick={() => navigate('/login')} />
+            </div>
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home
