@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { createUser } from '../api/api'
+import { useNavigate } from 'react-router-dom'
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('')
@@ -7,6 +8,7 @@ const Register: React.FC = () => {
     const [name, setName] = useState('')
     const [error, setError] = useState<string | null>(null)
     const [success, setSuccess] = useState<string | null>(null)
+    const navigate = useNavigate()
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleCreateUser = async (e: React.FormEvent) => {
@@ -16,6 +18,7 @@ const Register: React.FC = () => {
             await createUser(email, password, name)
             setSuccess('Usuario creado exitosamente')
             setError(null)
+            navigate('/login')
         } catch (error) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             setError((error as any).message)
