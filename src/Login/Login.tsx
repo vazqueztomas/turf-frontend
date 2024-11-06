@@ -18,7 +18,8 @@ const Login: React.FC = () => {
       setError(null);
       navigate('/programs'); // Redirigir a la página de programas después del inicio de sesión exitoso
     } catch (error) {
-      setError(error.message);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setError((error as any).message);
       setSuccess(null);
     }
   };
