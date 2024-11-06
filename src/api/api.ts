@@ -29,3 +29,26 @@ export const createUser = async (email: string, password: string, name: string) 
     }
   }
 };
+
+export const loginUser = async (email: string, password: string) => {
+  const loginPayload = {
+    username: email,
+    password,
+  };
+
+  try {
+    const response = await axios.post(`${API_URL}/token`, loginPayload, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    return response.data;
+  } catch (error: any) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.message || 'Error al iniciar sesión');
+    } else {
+      throw new Error('Error al iniciar sesión');
+    }
+  }
+};
