@@ -1,23 +1,37 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { loginUser } from '../api/api'
+import { useAuth } from '../AuthContext'
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState<string | null>(null)
+    const [success, setSuccess] = useState<string | null>(null)
     const navigate = useNavigate()
+    const { loginAuthContext } = useAuth()
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Aquí puedes agregar la lógica para manejar la autenticación
-        console.log('Email:', email)
-        console.log('Password:', password)
+
+        try {
+            await loginUser(email, password)
+            setSuccess('Inicio de sesión exitoso')
+            setError(null)
+            loginAuthContext()
+            navigate('/programs')
+        } catch (error) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            setError((error as any).message)
+            setSuccess(null)
+        }
     }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
                 <h2 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleLogin}>
                     <div className="mb-4">
                         <label className="block text-gray-700 mb-2" htmlFor="email">
                             Correo Electrónico
@@ -57,6 +71,8 @@ const Login: React.FC = () => {
                 >
                     Registrarse
                 </button>
+                {error && <p className="mt-4 text-red-500">{error}</p>}
+                {success && <p className="mt-4 text-green-500">{success}</p>}
             </div>
         </div>
     )
