@@ -19,4 +19,4 @@ export const VIDEOS_HIPODROMOS = [
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
     />,
-];
+]

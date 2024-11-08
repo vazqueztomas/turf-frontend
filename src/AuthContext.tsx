@@ -19,7 +19,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setIsAuthenticated(false)
     }
 
-    return <AuthContext.Provider value={{ isAuthenticated, loginAuthContext, logoutAuthContext }}>{children}</AuthContext.Provider>
+    return (
+        <AuthContext.Provider value={{ isAuthenticated, loginAuthContext, logoutAuthContext }}>
+            {children}
+        </AuthContext.Provider>
+    )
 }
 
 export const useAuth = () => {
