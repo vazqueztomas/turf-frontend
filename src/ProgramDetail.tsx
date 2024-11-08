@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import BackButton from './BackButton'
+import Navbar from './Navbar'
 
 interface RaceDetail {
     horse: string
@@ -37,8 +37,9 @@ const ProgramDetail: React.FC = () => {
     const { races } = location.state as { races: Race[] }
 
     return (
+        <>
+            <Navbar/>
         <div className="p-4">
-            <BackButton />
             <h2 className="text-2xl font-bold mb-4">Detalles del Programa</h2>
             <p className="text-lg">Fecha: {date}</p>
             <p className="text-lg">Hipódromo: {hipodromo}</p>
@@ -112,6 +113,7 @@ const ProgramDetail: React.FC = () => {
                 </div>
             )}
         </div>
+        </>
     )
 }
 
