@@ -21,6 +21,7 @@ export const createUser = async (email: string, password: string, name: string) 
         })
 
         return response.data
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         if (axios.isAxiosError(error) && error.response) {
             throw new Error(error.response.data.message || 'Error al crear el usuario')
