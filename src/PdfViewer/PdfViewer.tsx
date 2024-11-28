@@ -19,10 +19,9 @@ const Pdf: React.FC = () => {
 const PdfComponent: React.FC = () => {
     return (
         <div>
-            <div style={{ width: '50%', margin: '0 auto' }}>
+            <div style={{ width: '50%', height: '70vh', margin: '0 auto', overflow: 'auto' }}>  
                 <Pdf />
             </div>
-            <Pdf />
         </div>
     )
 }
