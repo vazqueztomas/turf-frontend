@@ -3,7 +3,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css'
 import '@react-pdf-viewer/default-layout/lib/styles/index.css'
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
 import pdf_palermo from '../assets/example.pdf'
-import './PdfViewer.css' // Import the CSS file
+import './PdfViewer.css'
 
 const Pdf: React.FC = () => {
     const defaultLayoutPluginInstance = defaultLayoutPlugin()
