@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const BackButton: React.FC = () => {
+export const BackButton: React.FC = () => {
     const navigate = useNavigate()
 
     return (
@@ -13,5 +13,3 @@ const BackButton: React.FC = () => {
         </button>
     )
 }
-
-export default BackButton

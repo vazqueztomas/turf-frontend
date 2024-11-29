@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import BackButton from './BackButton'
-import { programs } from './programData'
+import { BackButton } from '../components'
+import { programs } from '../assets/programs'
 
-const Programs: React.FC = () => {
+export const Programs: React.FC = () => {
     const navigate = useNavigate()
 
     return (
@@ -31,5 +31,3 @@ const Programs: React.FC = () => {
         </div>
     )
 }
-
-export default Programs

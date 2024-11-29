@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
-const Login: React.FC = () => {
+export const Register: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate()
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        // Aquí puedes agregar la lógica para manejar la autenticación
+        // Aquí puedes agregar la lógica para manejar el registro
         console.log('Email:', email)
         console.log('Password:', password)
+        console.log('Confirm Password:', confirmPassword)
     }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h2>
+                <h2 className="text-2xl font-bold mb-6 text-center">Registrarse</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700 mb-2" htmlFor="email">
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
                             required
                         />
                     </div>
-                    <div className="mb-6">
+                    <div className="mb-4">
                         <label className="block text-gray-700 mb-2" htmlFor="password">
                             Contraseña
                         </label>
@@ -44,22 +44,27 @@ const Login: React.FC = () => {
                             required
                         />
                     </div>
+                    <div className="mb-6">
+                        <label className="block text-gray-700 mb-2" htmlFor="confirmPassword">
+                            Confirmar Contraseña
+                        </label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            className="w-full px-3 py-2 border rounded"
+                            value={confirmPassword}
+                            onChange={e => setConfirmPassword(e.target.value)}
+                            required
+                        />
+                    </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 mb-4"
+                        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700"
                     >
-                        Iniciar Sesión
+                        Registrarse
                     </button>
                 </form>
-                <button
-                    className="w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-700"
-                    onClick={() => navigate('/register')}
-                >
-                    Registrarse
-                </button>
             </div>
         </div>
     )
 }
-
-export default Login
