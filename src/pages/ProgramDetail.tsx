@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
-import BackButton from './BackButton'
+import { BackButton } from '../components'
 
 interface RaceDetail {
     horse: string
@@ -17,7 +17,7 @@ interface Race {
     details: RaceDetail[]
 }
 
-const ProgramDetail: React.FC = () => {
+export const ProgramDetail: React.FC = () => {
     const { date, hipodromo } = useParams<{ date: string; hipodromo: string }>()
     const location = useLocation()
     const navigate = useNavigate()
@@ -114,5 +114,3 @@ const ProgramDetail: React.FC = () => {
         </div>
     )
 }
-
-export default ProgramDetail

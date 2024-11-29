@@ -1,9 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Header from './assets/Header'
-import Button from './assets/Button'
+import { Header, Button } from '../components'
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
     const navigate = useNavigate()
 
     return (
@@ -18,5 +17,3 @@ const Home: React.FC = () => {
         </div>
     )
 }
-
-export default Home
