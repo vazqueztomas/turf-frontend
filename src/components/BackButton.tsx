@@ -1,15 +1,14 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ArrowLeftIcon } from '@radix-ui/react-icons'
 
 export const BackButton: React.FC = () => {
     const navigate = useNavigate()
 
     return (
-        <button
-            className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700"
-            onClick={() => navigate(-1)}
-        >
-            Volver Atrás
+        <button className="my-8 hover:underline text-lg flex gap-2 items-center" onClick={() => navigate(-1)}>
+            <ArrowLeftIcon />
+            Volver
         </button>
     )
 }

@@ -1,16 +1,14 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import { ProgramDetail, PdfViewer, Login, Register, Home, Programs } from './pages'
+import routes from './routes'
 
 export default function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/pdf" element={<PdfViewer />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/programs" element={<Programs />} />
-                <Route path="/program/:date/:hipodromo" element={<ProgramDetail />} />
+                {routes.map(({ path, page }) => {
+                    const Page = page
+                    return <Route key={path} path={path} element={<Page />} />
+                })}
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>
