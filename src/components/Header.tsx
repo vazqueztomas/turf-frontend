@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
             <nav>
                 <ul className="flex gap-6">
                     {sections.map((section, index) => (
-                        <li>
+                        <li key = {index}>
                             <Link
                                 key={index}
                                 to={section.href}
