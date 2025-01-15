@@ -2,8 +2,10 @@ import { ChevronRight, Trophy, TrendingUp, Users } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/Card'
 import logo from '../assets/logo.jpg'
 import { Button } from '../components/Button'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
+    const navigate = useNavigate()
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-100 to-gray-200 text-gray-800">
             <header className="container mx-auto py-8">
@@ -33,9 +35,9 @@ export default function Home() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-6">
-                        <Button label="Inicia sesion">
+                        <Button label="Inicia sesion" onClick={() => navigate("/login")}>
                         </Button>
-                        <Button label="Ver Programas">
+                        <Button label="Ver Programas" onClick={() => navigate("/programs")}>
 
                         </Button>
                     </div>
