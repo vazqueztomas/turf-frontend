@@ -33,10 +33,10 @@ export default function Home() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-6">
-                        <Button size="lg" className="bg-gray-900 text-white hover:bg-gray-800 shadow-lg" label="Inicia sesion">
+                        <Button label="Inicia sesion">
                         </Button>
-                        <Button size="lg" variant="outline" className="bg-white text-gray-900 hover:bg-gray-100 border-gray-300 shadow-lg" label ="Ver Programas">
-                            
+                        <Button label="Ver Programas">
+
                         </Button>
                     </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
                         <Card className="bg-white shadow-xl">
                             <CardHeader>
                                 <CardTitle className="flex items-center space-x-3 text-gray-900">
-                                    <TrendingUp className="h-7 w-7 text-gray-700" />
+                                    <TrendingUp className="h-6 w-6 text-gray-700" />
                                     <span>Análisis Avanzado</span>
                                 </CardTitle>
                             </CardHeader>
@@ -55,7 +55,7 @@ export default function Home() {
                         <Card className="bg-white shadow-xl">
                             <CardHeader>
                                 <CardTitle className="flex items-center space-x-3 text-gray-900">
-                                    <Trophy className="h-7 w-7 text-gray-700" />
+                                    <Trophy className="h-6 w-6 text-gray-700" />
                                     <span>Resultados Probados</span>
                                 </CardTitle>
                             </CardHeader>
@@ -66,7 +66,7 @@ export default function Home() {
                         <Card className="bg-white shadow-xl">
                             <CardHeader>
                                 <CardTitle className="flex items-center space-x-3 text-gray-900">
-                                    <Users className="h-7 w-7 text-gray-700" />
+                                    <Users className="h-6 w-6 text-gray-700" />
                                     <span>Comunidad Selecta</span>
                                 </CardTitle>
                             </CardHeader>
@@ -76,10 +76,10 @@ export default function Home() {
                         </Card>
                     </div>
 
-                        <a href="/about" className="flex items-center text-lg">
-                            Descubre nuestra trayectoria
-                            <ChevronRight className="ml-2 h-5 w-5" />
-                        </a>
+                    <a href="/about" className="flex items-center text-lg">
+                        Descubre nuestra trayectoria
+                        <ChevronRight className="ml-2 h-5 w-5" />
+                    </a>
                 </div>
             </main>
 
