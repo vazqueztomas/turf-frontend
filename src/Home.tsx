@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import type React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from './assets/Header'
 import Button from './assets/Button'
@@ -11,6 +13,9 @@ const Home: React.FC = () => {
             <Header />
             <div className="w-full max-w-xs">
                 <Button label="Programas" onClick={() => navigate('/programs')} />
+            </div>
+            <div className="w-full max-w-xs">
+                <Button label="Caballos" onClick={() => navigate('/horses')} />
             </div>
             <div className="w-full max-w-xs">
                 <Button label="Iniciar Sesión" onClick={() => navigate('/login')} />
