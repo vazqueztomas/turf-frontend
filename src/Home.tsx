@@ -2,15 +2,12 @@
 
 import type React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Header from './assets/Header'
 
 const Home: React.FC = () => {
     const navigate = useNavigate()
 
     return (
         <div className="min-h-screen flex flex-col items-center pt-6 md:pt-10 bg-gray-100 px-4">
-            <Header />
-
             <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
                 <button
                     onClick={() => navigate('/programs')}

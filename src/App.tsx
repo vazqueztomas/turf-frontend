@@ -4,7 +4,6 @@ import Programs from './Programs'
 import ProgramDetail from './ProgramDetail'
 import Login from './Auth/Login/Login'
 import Register from './Auth/Register/Register'
-import PdfComponent from './PdfViewer/PdfViewer'
 import Horses from './Horses'
 import Live from './Live'
 
@@ -13,7 +12,6 @@ export default function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/pdf" element={<PdfComponent />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/programs" element={<Programs />} />
