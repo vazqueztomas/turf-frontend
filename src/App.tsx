@@ -7,6 +7,7 @@ import Register from './Auth/Register/Register'
 import PdfComponent from './PdfViewer/PdfViewer'
 import Horses from './Horses'
 import ProtectedRoute from './ProtectedRoute'
+import Live from './Live'
 
 export default function App() {
     return (
@@ -17,15 +18,8 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/programs" element={<Programs />} />
-                <Route path="/program/:date/:hipodromo" element={<ProgramDetail />} />
-                <Route
-                    path="/horses"
-                    element={
-                        <ProtectedRoute>
-                            <Horses />
-                        </ProtectedRoute>
-                    }
-                />{' '}
+                <Route path="/program/:id" element={<ProgramDetail />} />
+                <Route path="/horses" element={<Horses />} /> <Route path="/live" element={<Live />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>

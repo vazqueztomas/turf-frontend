@@ -36,7 +36,7 @@ const Horses: React.FC = () => {
                 setLoading(true)
                 setError(null)
                 const response = await fetch(
-                    `http://127.0.0.1:8000/horses?page=${currentPage}&limit=${limit}`,
+                    `http://127.0.0.1:8000/turf/horses?page=${currentPage}&limit=${limit}`,
                 )
 
                 if (!response.ok) {
