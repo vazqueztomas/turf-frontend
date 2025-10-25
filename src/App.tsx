@@ -1,14 +1,22 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import routes from './routes'
+import Home from './Home'
+import Programs from './Programs'
+import ProgramDetail from './ProgramDetail'
+import Login from './Auth/Login/Login'
+import Register from './Auth/Register/Register'
+import Horses from './Horses'
+import Live from './Live'
 
 export default function App() {
     return (
         <Router>
             <Routes>
-                {routes.map(({ path, page }) => {
-                    const Page = page
-                    return <Route key={path} path={path} element={<Page />} />
-                })}
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/programs" element={<Programs />} />
+                <Route path="/program/:id" element={<ProgramDetail />} />
+                <Route path="/horses" element={<Horses />} /> <Route path="/live" element={<Live />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>
