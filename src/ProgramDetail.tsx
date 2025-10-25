@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import BackButton from './BackButton'
 import HorseCard from './HorseCard'
+<<<<<<< HEAD
+=======
+import { BACKEND_URL } from './config'
+>>>>>>> 1928518 (fix(config): fix url)
 
 interface Race {
     numero: number
@@ -52,7 +56,11 @@ const ProgramDetail: React.FC = () => {
         try {
             setLoading(true)
             setError(null)
+<<<<<<< HEAD
             const response = await fetch(`http://127.0.0.1:8000/turf/races/${raceId}`)
+=======
+            const response = await fetch(`${BACKEND_URL}/turf/races/${raceId}`)
+>>>>>>> 1928518 (fix(config): fix url)
 
             if (!response.ok) {
                 throw new Error('Error al cargar los detalles de la carrera')
