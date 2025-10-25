@@ -26,13 +26,13 @@ const Register: React.FC = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, name }),
             })
-            console.log(JSON.stringify({ email, password, name }))
             if (!res.ok) {
                 const data = await res.json()
                 throw new Error(data.detail || 'Error al registrarse')
             }
 
             navigate('/login')
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.message)
         } finally {

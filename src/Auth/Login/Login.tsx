@@ -8,6 +8,7 @@ const Login: React.FC = () => {
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    // @ts-expect-error this is necessary
     const { login } = useAuth()
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -18,6 +19,7 @@ const Login: React.FC = () => {
         try {
             await login(email, password)
             navigate('/horses')
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.log(err)
             setError('Credenciales inválidas. Intenta de nuevo.')

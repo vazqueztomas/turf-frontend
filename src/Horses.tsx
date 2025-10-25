@@ -4,7 +4,6 @@ import type React from 'react'
 import { useState, useEffect } from 'react'
 import BackButton from './BackButton'
 import HorseCard from './HorseCard'
-import { useAuth } from './context/AuthContext'
 interface Horse {
     id: number
     numero: string
@@ -21,7 +20,6 @@ interface Horse {
 }
 
 const Horses: React.FC = () => {
-    const { token } = useAuth()
     const [horses, setHorses] = useState<Horse[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

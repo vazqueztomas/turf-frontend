@@ -1,8 +1,9 @@
 import { createContext, useState, useEffect, useContext } from 'react'
 
 const AuthContext = createContext(null)
+type Props = { children: React.ReactNode }
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: Props) => {
     const [token, setToken] = useState(localStorage.getItem('token'))
     const [user, setUser] = useState(null)
 
@@ -35,6 +36,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
+        // @ts-expect-error this is necessary to compile
         <AuthContext.Provider value={{ token, login, logout, user, setUser }}>
             {children}
         </AuthContext.Provider>

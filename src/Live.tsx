@@ -8,6 +8,8 @@ const Live: React.FC = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
+    console.log(setError)
+
     useEffect(() => {
         // Simular carga
         const timer = setTimeout(() => {

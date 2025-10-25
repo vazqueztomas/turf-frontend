@@ -6,7 +6,6 @@ import Login from './Auth/Login/Login'
 import Register from './Auth/Register/Register'
 import PdfComponent from './PdfViewer/PdfViewer'
 import Horses from './Horses'
-import ProtectedRoute from './ProtectedRoute'
 import Live from './Live'
 
 export default function App() {
