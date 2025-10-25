@@ -4,6 +4,8 @@ import type React from 'react'
 import { useState, useEffect } from 'react'
 import BackButton from './BackButton'
 import HorseCard from './HorseCard'
+import { BACKEND_URL } from './config'
+
 interface Horse {
     id: number
     numero: string
@@ -33,9 +35,7 @@ const Horses: React.FC = () => {
             try {
                 setLoading(true)
                 setError(null)
-                const response = await fetch(
-                    `http://127.0.0.1:8000/turf/horses?page=${currentPage}&limit=${limit}`,
-                )
+                const response = await fetch(`${BACKEND_URL}/turf/horses?page=${currentPage}&limit=${limit}`)
 
                 if (!response.ok) {
                     throw new Error('Error al cargar los caballos')

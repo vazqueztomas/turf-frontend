@@ -4,6 +4,7 @@ import type React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BackButton from './BackButton'
+import { BACKEND_URL } from './config'
 
 interface Race {
     numero: number
@@ -32,7 +33,7 @@ const Programs: React.FC = () => {
         try {
             setLoading(true)
             setError(null)
-            const response = await fetch('http://127.0.0.1:8000/turf/races')
+            const response = await fetch(`${BACKEND_URL}/turf/races`)
 
             if (!response.ok) {
                 throw new Error('Error al cargar las carreras')

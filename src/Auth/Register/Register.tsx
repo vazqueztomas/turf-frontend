@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../../config'
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('')
@@ -21,7 +22,7 @@ const Register: React.FC = () => {
 
         setLoading(true)
         try {
-            const res = await fetch('http://127.0.0.1:8000/users/register', {
+            const res = await fetch(`${BACKEND_URL}/users/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, name }),
