@@ -50,14 +50,8 @@ const Programs: React.FC = () => {
 
     const groupRacesByDateAndHipodromo = (): GroupedRaces => {
         const grouped: GroupedRaces = {}
-
         races.forEach(race => {
-            const date = new Date(race.fecha).toLocaleDateString('es-ES', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-            })
-            const key = `${date} - ${race.hipodromo}`
+            const key = `${race.hipodromo}`
 
             if (!grouped[key]) {
                 grouped[key] = []
@@ -164,12 +158,7 @@ const Programs: React.FC = () => {
                                                             {race.distancia}m
                                                         </span>
                                                     )}
-                                                    <span className="text-gray-500">
-                                                        {new Date(race.fecha).toLocaleTimeString('es-ES', {
-                                                            hour: '2-digit',
-                                                            minute: '2-digit',
-                                                        })}
-                                                    </span>
+                                                    <span className="text-gray-500">{race.fecha}</span>
                                                 </div>
                                             </div>
 
