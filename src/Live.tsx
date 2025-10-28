@@ -6,6 +6,8 @@ import BackButton from './BackButton'
 
 const Live: React.FC = () => {
     const [loading, setLoading] = useState(true)
+    // @ts-expect-error this is spected
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
