@@ -8,8 +8,6 @@ const Live: React.FC = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    console.log(setError)
-
     useEffect(() => {
         // Simular carga
         const timer = setTimeout(() => {
@@ -61,34 +59,37 @@ const Live: React.FC = () => {
                         <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Transmisión en Vivo</h1>
                     </div>
 
-                    <div className="bg-gray-900 rounded-lg aspect-video flex items-center justify-center">
-                        <div className="text-center text-white p-6">
-                            <svg
-                                className="w-16 h-16 mx-auto mb-4 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                />
-                            </svg>
-                            <p className="text-lg mb-2">No hay transmisión activa</p>
-                            <p className="text-sm text-gray-400">
-                                La transmisión comenzará cuando haya carreras en vivo
-                            </p>
-                        </div>
+                    <div
+                        className="relative w-full"
+                        style={{ paddingBottom: '56.25%', marginBottom: '2rem' }}
+                    >
+                        <iframe
+                            className="absolute top-0 left-0 w-full h-full rounded-lg"
+                            src="https://www.youtube.com/embed/KmD-CDIWWdc?si=h3THoa1sVR1VVYt0"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+
+                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                        <iframe
+                            className="absolute top-0 left-0 w-full h-full rounded-lg"
+                            src="https://www.youtube.com/embed/lR7a1-h5QG0?si=6lPxgYS_Dwzmg-AD"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                        ></iframe>
                     </div>
                 </div>
 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 md:p-6">
-                    <h2 className="text-lg font-semibold text-blue-900 mb-2">Próximas transmisiones</h2>
+                    <h2 className="text-lg font-semibold text-blue-900 mb-2">Transmisión en Vivo</h2>
                     <p className="text-sm text-blue-700">
-                        Las transmisiones en vivo estarán disponibles durante los días de carrera. Vuelve a
-                        consultar el horario de las carreras en la sección de Programas.
+                        Disfruta de la transmisión en vivo de las carreras. El video se actualiza
+                        automáticamente durante los días de carrera.
                     </p>
                 </div>
             </div>

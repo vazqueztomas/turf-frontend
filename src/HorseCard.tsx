@@ -68,7 +68,7 @@ const HorseCard: React.FC<HorseCardProps> = ({ horse }) => {
                     {horse.padre_madre && (
                         <div className="flex items-start">
                             <span className="text-gray-500 font-medium min-w-[70px] sm:min-w-[80px]">
-                                Padres:
+                                Padres - Entrenador:
                             </span>
                             <span className="text-gray-900 text-xs leading-relaxed break-words">
                                 {horse.padre_madre}
