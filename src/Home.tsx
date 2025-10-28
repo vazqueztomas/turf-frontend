@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 const Home: React.FC = () => {
     const navigate = useNavigate()
     const [nextRaceTime, setNextRaceTime] = useState(15 * 60) // 15 minutes in seconds
-    const [randomRaceNumber, setRandomRaceNumber] = useState(Math.round(Math.random() * 10 - 1))
 
     useEffect(() => {
         const timer = setInterval(() => {
