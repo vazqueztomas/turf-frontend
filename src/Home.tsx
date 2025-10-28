@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 const Home: React.FC = () => {
     const navigate = useNavigate()
     const [nextRaceTime, setNextRaceTime] = useState(15 * 60) // 15 minutes in seconds
+    const [randomRaceNumber, setRandomRaceNumber] = useState(Math.round(Math.random() * 10 - 1))
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -261,7 +262,7 @@ const Home: React.FC = () => {
                         </button>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {['THUNDER BOLT', 'GOLDEN STAR', 'SPEED DEMON', 'ROYAL PRINCE'].map((name, i) => (
+                        {['GOLDEN STAR', 'HAPPY QUEEN'].map((name, i) => (
                             <div
                                 key={i}
                                 onClick={() => navigate('/horses')}
