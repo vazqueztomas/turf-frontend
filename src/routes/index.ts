@@ -1,10 +1,6 @@
-import { Home, PdfViewer, Register, Login, Programs, ProgramDetail } from '../pages'
+import { PdfViewer, Register, Login, Programs, ProgramDetail } from '../pages'
 
 const routes = [
-    {
-        path: '/',
-        page: Home,
-    },
     {
         path: '/pdf',
         page: PdfViewer,
