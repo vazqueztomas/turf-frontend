@@ -208,7 +208,7 @@ const Programs: React.FC = () => {
                             <div className="divide-y divide-gray-700">
                                 {groupRaces.map(race => (
                                     <div
-                                        key={race.race_id}
+                                        key={race.id}
                                         onClick={() => navigate(`/program/${race.race_id}`)}
                                         className="group p-4 sm:p-6 hover:bg-gray-800/50 cursor-pointer transition-all duration-200"
                                     >

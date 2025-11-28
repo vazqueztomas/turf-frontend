@@ -16,6 +16,7 @@ interface Race {
     id: number
     hipodromo: string
     race_id: UUIDTypes
+    hour: string
 }
 interface Horse {
     id: number
@@ -39,7 +40,7 @@ interface RaceDetail {
 }
 
 const ProgramDetail: React.FC = () => {
-    const { race_id } = useParams<{ race_id: UUIDTypes }>()
+    const { race_id } = useParams<{ race_id: string }>()
     const [raceDetail, setRaceDetail] = useState<RaceDetail | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
@@ -167,18 +168,14 @@ const ProgramDetail: React.FC = () => {
                                     <p className="text-xs sm:text-sm text-gray-400 font-semibold mb-2">
                                         Fecha
                                     </p>
-                                    <p className="text-sm sm:text-base text-white font-bold">
-                                        {race.fecha}
-                                    </p>
+                                    <p className="text-sm sm:text-base text-white font-bold">{race.fecha}</p>
                                 </div>
 
                                 <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
                                     <p className="text-xs sm:text-sm text-gray-400 font-semibold mb-2">
                                         Hora
                                     </p>
-                                    <p className="text-sm sm:text-base text-white font-bold">
-                                        {race.hour}
-                                    </p>
+                                    <p className="text-sm sm:text-base text-white font-bold">{race.hour}</p>
                                 </div>
                             </div>
                         </div>
