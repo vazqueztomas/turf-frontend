@@ -168,11 +168,7 @@ const ProgramDetail: React.FC = () => {
                                         Fecha
                                     </p>
                                     <p className="text-sm sm:text-base text-white font-bold">
-                                        {new Date(race.fecha).toLocaleDateString('es-ES', {
-                                            day: '2-digit',
-                                            month: '2-digit',
-                                            year: 'numeric',
-                                        })}
+                                        {race.fecha}
                                     </p>
                                 </div>
 
@@ -181,10 +177,7 @@ const ProgramDetail: React.FC = () => {
                                         Hora
                                     </p>
                                     <p className="text-sm sm:text-base text-white font-bold">
-                                        {new Date(race.fecha).toLocaleTimeString('es-ES', {
-                                            hour: '2-digit',
-                                            minute: '2-digit',
-                                        })}
+                                        {race.hour}
                                     </p>
                                 </div>
                             </div>
