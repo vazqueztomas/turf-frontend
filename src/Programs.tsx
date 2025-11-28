@@ -209,7 +209,7 @@ const Programs: React.FC = () => {
                                 {groupRaces.map(race => (
                                     <div
                                         key={race.race_id}
-                                        onClick={() => navigate(`/general/races/${race.race_id}`)}
+                                        onClick={() => navigate(`/program/${race.race_id}`)}
                                         className="group p-4 sm:p-6 hover:bg-gray-800/50 cursor-pointer transition-all duration-200"
                                     >
                                         <div className="flex items-center justify-between gap-4">
