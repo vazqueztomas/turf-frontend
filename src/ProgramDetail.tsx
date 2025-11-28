@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import BackButton from './BackButton'
 import HorseCard from './HorseCard'
 import { BACKEND_URL } from './config'
+import { UUIDTypes } from 'uuid'
 
 interface Race {
     numero: number
@@ -14,8 +15,8 @@ interface Race {
     distancia: number | null
     id: number
     hipodromo: string
+    race_id: UUIDTypes
 }
-
 interface Horse {
     id: number
     numero: string
@@ -38,22 +39,22 @@ interface RaceDetail {
 }
 
 const ProgramDetail: React.FC = () => {
-    const { id } = useParams<{ id: string }>()
+    const { race_id } = useParams<{ race_id: UUIDTypes }>()
     const [raceDetail, setRaceDetail] = useState<RaceDetail | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-        if (id) {
-            fetchRaceDetail(id)
+        if (race_id) {
+            fetchRaceDetail(race_id)
         }
-    }, [id])
+    }, [race_id])
 
-    const fetchRaceDetail = async (raceId: string) => {
+    const fetchRaceDetail = async (raceId: UUIDTypes) => {
         try {
             setLoading(true)
             setError(null)
-            const response = await fetch(`${BACKEND_URL}/turf/races/${raceId}`)
+            const response = await fetch(`${BACKEND_URL}/general/races/${raceId}`)
 
             if (!response.ok) {
                 throw new Error('Error al cargar los detalles de la carrera')
@@ -102,7 +103,7 @@ const ProgramDetail: React.FC = () => {
                             Error: {error || 'No se encontró la carrera'}
                         </p>
                         <button
-                            onClick={() => id && fetchRaceDetail(id)}
+                            onClick={() => race_id && fetchRaceDetail(race_id)}
                             className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
                         >
                             Reintentar

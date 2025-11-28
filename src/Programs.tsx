@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BackButton from './BackButton'
 import { BACKEND_URL } from './config'
+import { UUIDTypes } from 'uuid'
 
 interface Race {
     numero: number
@@ -13,6 +14,7 @@ interface Race {
     distancia: number | null
     id: number
     hipodromo: string
+    race_id: UUIDTypes
 }
 
 interface GroupedRaces {
@@ -33,7 +35,7 @@ const Programs: React.FC = () => {
         try {
             setLoading(true)
             setError(null)
-            const response = await fetch(`${BACKEND_URL}/turf/races`)
+            const response = await fetch(`${BACKEND_URL}/general/races`)
 
             if (!response.ok) {
                 throw new Error('Error al cargar las carreras')
@@ -64,6 +66,7 @@ const Programs: React.FC = () => {
     }
 
     const groupedRaces = groupRacesByDateAndHipodromo()
+    console.log(groupedRaces)
 
     if (loading) {
         return (
@@ -205,15 +208,15 @@ const Programs: React.FC = () => {
                             <div className="divide-y divide-gray-700">
                                 {groupRaces.map(race => (
                                     <div
-                                        key={race.id}
-                                        onClick={() => navigate(`/program/${race.id}`)}
+                                        key={race.race_id}
+                                        onClick={() => navigate(`/general/races/${race.race_id}`)}
                                         className="group p-4 sm:p-6 hover:bg-gray-800/50 cursor-pointer transition-all duration-200"
                                     >
                                         <div className="flex items-center justify-between gap-4">
                                             <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-                                                <span className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 text-white text-base sm:text-lg font-bold rounded-xl shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
+                                                {/* <span className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-600 to-blue-700 text-white text-base sm:text-lg font-bold rounded-xl shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform">
                                                     {race.numero}
-                                                </span>
+                                                </span> */}
                                                 <div className="flex-1 min-w-0">
                                                     <h3 className="text-base sm:text-lg font-bold text-white truncate group-hover:text-blue-400 transition-colors">
                                                         {race.nombre || 'Sin nombre'}
@@ -221,7 +224,7 @@ const Programs: React.FC = () => {
                                                     <div className="flex flex-wrap items-center gap-2 mt-2">
                                                         {race.distancia && (
                                                             <span className="inline-flex items-center px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-xs font-semibold border border-blue-800">
-                                                                {race.distancia}m
+                                                                {race.distancia || 'Sin definir'}
                                                             </span>
                                                         )}
                                                         <span className="text-gray-400 text-xs sm:text-sm font-medium">

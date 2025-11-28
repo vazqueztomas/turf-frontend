@@ -35,7 +35,9 @@ const Horses: React.FC = () => {
             try {
                 setLoading(true)
                 setError(null)
-                const response = await fetch(`${BACKEND_URL}/turf/horses?page=${currentPage}&limit=${limit}`)
+                const response = await fetch(
+                    `${BACKEND_URL}/general/horses?page=${currentPage}&limit=${limit}`,
+                )
 
                 if (!response.ok) {
                     throw new Error('Error al cargar los caballos')
