@@ -3,16 +3,48 @@
 import type React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { BACKEND_URL } from './config'
+
+interface FeaturedHorse {
+    id: number
+    nombre: string | null
+    numero: string | null
+    jockey: string | null
+    peso: number | null
+}
+
+interface FeaturedRace {
+    race_id: string
+    numero: number | null
+    nombre: string | null
+    distancia: number | null
+    fecha: string | null
+    hipodromo: string | null
+    hour: string | null
+}
 
 const Home: React.FC = () => {
     const navigate = useNavigate()
     const [nextRaceTime, setNextRaceTime] = useState(15 * 60) // 15 minutes in seconds
+    const [featuredHorses, setFeaturedHorses] = useState<FeaturedHorse[]>([])
+    const [featuredRaces, setFeaturedRaces] = useState<FeaturedRace[]>([])
 
     useEffect(() => {
         const timer = setInterval(() => {
             setNextRaceTime(prev => (prev > 0 ? prev - 1 : 0))
         }, 1000)
         return () => clearInterval(timer)
+    }, [])
+
+    useEffect(() => {
+        fetch(`${BACKEND_URL}/general/horses/random?count=4`)
+            .then(res => res.json())
+            .then(data => setFeaturedHorses(data))
+            .catch(() => setFeaturedHorses([]))
+        fetch(`${BACKEND_URL}/general/races/random?count=3`)
+            .then(res => res.json())
+            .then(data => setFeaturedRaces(data))
+            .catch(() => setFeaturedRaces([]))
     }, [])
 
     const formatTime = (seconds: number) => {
@@ -120,25 +152,29 @@ const Home: React.FC = () => {
                         </button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {[3].map(i => (
+                        {featuredRaces.map((race, i) => (
                             <div
-                                key={i}
+                                key={race.race_id}
                                 onClick={() => navigate('/programs')}
                                 className="relative group cursor-pointer overflow-hidden rounded-xl bg-[#1a1a1a] border border-white/10 hover:border-red-500/50 transition-all"
                             >
                                 <div className="aspect-video relative overflow-hidden">
                                     <img
-                                        src={`/horse-racing-track-number-.jpg?height=300&width=400&query=horse racing track number ${i}`}
-                                        alt={`Race ${i}`}
+                                        src={`/horse-racing-track-number-.jpg?height=300&width=400&query=horse racing track number ${i + 1}`}
+                                        alt={`Race ${i + 1}`}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
                                     <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
-                                        CARRERA {i}
+                                        CARRERA {race.numero ?? i + 1}
                                     </div>
                                 </div>
                                 <div className="p-4">
-                                    <h3 className="font-bold text-lg mb-1">Hipódromo de Palermo</h3>
-                                    <p className="text-sm text-gray-400">1200m • 14:30 hs</p>
+                                    <h3 className="font-bold text-lg mb-1">{race.nombre ?? race.hipodromo ?? '—'}</h3>
+                                    <p className="text-sm text-gray-400">
+                                        {race.distancia ? `${race.distancia}m` : '—'}
+                                        {race.hour ? ` • ${race.hour} hs` : ''}
+                                        {race.fecha ? ` • ${race.fecha}` : ''}
+                                    </p>
                                 </div>
                             </div>
                         ))}
@@ -261,25 +297,27 @@ const Home: React.FC = () => {
                         </button>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {['GOLDEN STAR', 'HAPPY QUEEN'].map((name, i) => (
+                        {featuredHorses.map((horse, i) => (
                             <div
-                                key={i}
+                                key={horse.id}
                                 onClick={() => navigate('/horses')}
                                 className="bg-[#1a1a1a] rounded-xl overflow-hidden border border-white/10 hover:border-yellow-500/50 transition-all cursor-pointer group"
                             >
                                 <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
                                     <img
                                         src={`/champion-race-horse-portrait-.jpg?height=300&width=300&query=champion race horse portrait ${i + 1}`}
-                                        alt={name}
+                                        alt={horse.nombre ?? ''}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
                                     <div className="absolute top-2 left-2 bg-yellow-500 text-black px-2 py-1 rounded text-xs font-bold">
-                                        #{i + 1}
+                                        #{horse.numero ?? i + 1}
                                     </div>
                                 </div>
                                 <div className="p-3">
-                                    <h3 className="font-bold text-sm mb-1">{name}</h3>
-                                    <p className="text-xs text-gray-400">6P • 57kg</p>
+                                    <h3 className="font-bold text-sm mb-1">{horse.nombre ?? '—'}</h3>
+                                    <p className="text-xs text-gray-400">
+                                        {horse.jockey ?? '—'}{horse.peso ? ` • ${horse.peso}kg` : ''}
+                                    </p>
                                 </div>
                             </div>
                         ))}
