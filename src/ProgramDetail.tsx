@@ -2,7 +2,7 @@
 
 import type React from 'react'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import BackButton from './BackButton'
 import HorseCard from './HorseCard'
 import { BACKEND_URL } from './config'
@@ -41,12 +41,15 @@ interface RaceDetail {
 
 const ProgramDetail: React.FC = () => {
     const { race_id } = useParams<{ race_id: string }>()
-    const [raceDetail, setRaceDetail] = useState<RaceDetail | null>(null)
-    const [loading, setLoading] = useState(true)
+    const location = useLocation()
+    const stateDetail = (location.state as { raceDetail?: RaceDetail } | null)?.raceDetail ?? null
+
+    const [raceDetail, setRaceDetail] = useState<RaceDetail | null>(stateDetail)
+    const [loading, setLoading] = useState(!stateDetail)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
-        if (race_id) {
+        if (!stateDetail && race_id) {
             fetchRaceDetail(race_id)
         }
     }, [race_id])

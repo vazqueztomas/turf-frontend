@@ -15,6 +15,24 @@ interface Race {
     id: number
     hipodromo: string
     race_id: UUIDTypes
+    hour: string | null
+    // scraper-only fields
+    _scraped?: boolean
+    _horses?: ScraperHorse[]
+}
+
+interface ScraperHorse {
+    numero: string
+    nombre: string
+    sexo: string
+    peso: number
+    herraje: string
+    stud: string
+    jockey: string
+    peso_jockey: number
+    entrenador: string
+    padre_madre: string
+    ultimas: string
 }
 
 interface GroupedRaces {
@@ -35,14 +53,42 @@ const Programs: React.FC = () => {
         try {
             setLoading(true)
             setError(null)
-            const response = await fetch(`${BACKEND_URL}/general/races`)
 
-            if (!response.ok) {
-                throw new Error('Error al cargar las carreras')
+            const [dbRes, scraperRes] = await Promise.allSettled([
+                fetch(`${BACKEND_URL}/general/races?limit=500`),
+                fetch(`${BACKEND_URL}/san-isidro/scrape/upcoming`),
+            ])
+
+            const dbRaces: Race[] =
+                dbRes.status === 'fulfilled' && dbRes.value.ok
+                    ? ((await dbRes.value.json()).results ?? [])
+                    : []
+
+            let scraperRaces: Race[] = []
+            if (scraperRes.status === 'fulfilled' && scraperRes.value.ok) {
+                const scraperData = await scraperRes.value.json()
+                const dbRaceIds = new Set(dbRaces.map(r => `${r.hipodromo}-${r.numero}-${r.fecha}`))
+
+                scraperRaces = scraperData.races
+                    .filter((r: { numero: number }) => {
+                        const key = `San Isidro-${r.numero}-${scraperData.fecha}`
+                        return !dbRaceIds.has(key)
+                    })
+                    .map((r: { numero: number; nombre: string; hora: string; distancia: number; horses: ScraperHorse[] }) => ({
+                        race_id: `scraped-${scraperData.calendario_id}-${r.numero}` as unknown as UUIDTypes,
+                        numero: r.numero,
+                        nombre: r.nombre,
+                        distancia: r.distancia,
+                        fecha: scraperData.fecha,
+                        hipodromo: 'San Isidro',
+                        hour: r.hora,
+                        id: -r.numero,
+                        _scraped: true,
+                        _horses: r.horses,
+                    }))
             }
 
-            const data = await response.json()
-            setRaces(data.results || [])
+            setRaces([...dbRaces, ...scraperRaces])
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Error desconocido')
         } finally {
@@ -50,23 +96,17 @@ const Programs: React.FC = () => {
         }
     }
 
-    const groupRacesByDateAndHipodromo = (): GroupedRaces => {
+    const groupRacesByHipodromo = (): GroupedRaces => {
         const grouped: GroupedRaces = {}
-
         races.forEach(race => {
-            const key = `${race.hipodromo}`
-
-            if (!grouped[key]) {
-                grouped[key] = []
-            }
+            const key = race.hipodromo
+            if (!grouped[key]) grouped[key] = []
             grouped[key].push(race)
         })
-
         return grouped
     }
 
-    const groupedRaces = groupRacesByDateAndHipodromo()
-    console.log(groupedRaces)
+    const groupedRaces = groupRacesByHipodromo()
 
     if (loading) {
         return (
@@ -209,7 +249,20 @@ const Programs: React.FC = () => {
                                 {groupRaces.map(race => (
                                     <div
                                         key={race.id}
-                                        onClick={() => navigate(`/program/${race.race_id}`)}
+                                        onClick={() => {
+                                            if (race._scraped) {
+                                                navigate(`/program/${race.race_id}`, {
+                                                    state: {
+                                                        raceDetail: {
+                                                            race,
+                                                            horses: race._horses ?? [],
+                                                        },
+                                                    },
+                                                })
+                                            } else {
+                                                navigate(`/program/${race.race_id}`)
+                                            }
+                                        }}
                                         className="group p-4 sm:p-6 hover:bg-gray-800/50 cursor-pointer transition-all duration-200"
                                     >
                                         <div className="flex items-center justify-between gap-4">
