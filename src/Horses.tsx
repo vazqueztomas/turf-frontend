@@ -29,6 +29,14 @@ const Horses: React.FC = () => {
     const [limit] = useState(12)
     const [hasMore, setHasMore] = useState(true)
     const [searchTerm, setSearchTerm] = useState('')
+    const [totalHorses, setTotalHorses] = useState<number | null>(null)
+
+    useEffect(() => {
+        fetch(`${BACKEND_URL}/general/horses/count`)
+            .then(res => res.json())
+            .then(data => setTotalHorses(data.count))
+            .catch(() => {})
+    }, [])
 
     useEffect(() => {
         const fetchHorses = async () => {
@@ -154,7 +162,7 @@ const Horses: React.FC = () => {
                         <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
                             <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-4">
                                 <p className="text-gray-400 text-xs sm:text-sm mb-1">Total de caballos</p>
-                                <p className="text-white text-xl sm:text-2xl font-bold">+250</p>
+                                <p className="text-white text-xl sm:text-2xl font-bold">{totalHorses ?? '...'}</p>
                             </div>
                             <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg p-4">
                                 <p className="text-gray-400 text-xs sm:text-sm mb-1">Página Actual</p>
